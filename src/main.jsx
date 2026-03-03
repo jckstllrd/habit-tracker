@@ -1,10 +1,33 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./styles/index.css";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import Dashboard from "./routes/Dashboard.jsx";
+import AddHabit from "./routes/AddHabit.jsx";
+import HabitDetail from "./routes/HabitDetail.jsx";
+import Settings from "./routes/Settings.jsx";
 
-createRoot(document.getElementById('root')).render(
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Dashboard />,
+  },
+  {
+    path: "add",
+    element: <AddHabit />,
+  },
+  {
+    path: "habit/:id",
+    element: <HabitDetail />,
+  },
+  {
+    path: "settings",
+    element: <Settings />,
+  },
+]);
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
-)
+);
