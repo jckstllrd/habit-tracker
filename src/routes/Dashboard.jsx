@@ -1,3 +1,4 @@
+
 import "../styles/Dashboard.css";
 import { Link } from "react-router";
 
@@ -10,7 +11,7 @@ export default function Dashboard() {
           <Link to="add">Add Habit</Link>
         </li>
         <li>
-          <Link to="/habit/:id">View Habit</Link>
+          <Link to="habit">View Habit</Link>
         </li>
         <li>
           <Link to="settings">Settings</Link>
