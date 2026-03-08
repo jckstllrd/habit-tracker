@@ -5,7 +5,7 @@ export default function AddHabit() {
   return (
     <div>
       <h1>Add habit</h1>
-      <Link to="/">Back</Link>
+     
     </div>
   );
 }

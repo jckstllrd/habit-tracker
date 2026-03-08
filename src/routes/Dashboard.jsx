@@ -6,17 +6,7 @@ export default function Dashboard() {
   return (
     <div>
       <h1>dashboard view</h1>
-      <ul>
-        <li>
-          <Link to="add">Add Habit</Link>
-        </li>
-        <li>
-          <Link to="habit">View Habit</Link>
-        </li>
-        <li>
-          <Link to="settings">Settings</Link>
-        </li>
-      </ul>
+      
     </div>
   );
 }

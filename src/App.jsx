@@ -1,12 +1,24 @@
-import { Link } from "react-router";
+import { Link, Outlet } from "react-router";
 export default function App() {
+
   return (
     <>
       <nav>
-        <Link to="/">Dashboard</Link>
-        <Link to="/add">Add</Link>
-        <Link to="/settings">Settings</Link>
+        <ul>
+          <li>
+            <Link to="/">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="add">
+              Add
+            </Link>
+          </li>
+          <li>
+            <Link to="settings">Settings</Link>
+          </li>
+        </ul>
       </nav>
+      <div className="app-container"><Outlet /></div>
     </>
   );
 }

@@ -5,7 +5,7 @@ export default function HabitDetail() {
   return (
     <div>
       <h1>habit detail</h1>
-      <Link to="/">Back</Link>
+
     </div>
   );
 }
