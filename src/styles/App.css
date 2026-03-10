@@ -1,3 +1,20 @@
+/* #F4F4ED — main background
+#0B3948 — primary text/type colour
+#E71D36 — bad habits, alerts, pop elements
+#416165 — navbar/secondary surfaces
+#9FB1BC — muted shading, secondary text */
+
+@import "@fontsource/geist";
+:root {
+  --main-background: #f4f4ed;
+  --primary-text-colour: #0b3948;
+  --pop-colour: #e71d36;
+  --secondary-colour: #414165;
+  --tertiary-colour: #9fb1bc;
+
+  color: var(--primary-text-colour);
+  font-family: "Geist", sans-serif;
+}
 html,
 body {
   margin: 0;
@@ -6,6 +23,6 @@ body {
 }
 
 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: var(--primary-text-colour);
 }
