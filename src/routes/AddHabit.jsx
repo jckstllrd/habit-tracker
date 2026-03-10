@@ -17,6 +17,7 @@ export default function AddHabit() {
             id: id,
             name: e.target.habitName.value,
             type: e.target.habitType.value,
+            completions_log: [],
           };
           console.log(newHabit);
           addHabit(newHabit);

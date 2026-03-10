@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router";
+import "./styles/App.css"
 export default function App() {
   const [habits, setHabits] = useState([
     {
@@ -14,8 +15,8 @@ export default function App() {
   }
   return (
     <>
-      <nav>
-        <ul>
+      <div className="navbar">
+        <ul className="nav-links">
           <li>
             <Link to="/">Dashboard</Link>
           </li>
@@ -27,7 +28,7 @@ export default function App() {
             <Link to="settings">Settings</Link>
           </li>
         </ul>
-      </nav>
+      </div>
       <div className="app-container">
         <Outlet context={[habits, addHabit]} />
       </div>
