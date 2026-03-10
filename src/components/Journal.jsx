@@ -1,9 +1,10 @@
 import { useEffect } from "react";
+import DateRow from "./DateRow";
 
 function getDatesInMonth(date) {
   let days = [];
   let month = date.getMonth();
-  console.log("month is" ,month);
+  console.log("month is", month);
 
   let year = date.getYear();
   let daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -21,11 +22,15 @@ export default function Journal({ d, habits, addHabit }) {
   return (
     <div className="journal-container">
       <div className="dailyLine">
-        {days.map((day, index) => {
-          return <p key={index}>{day}</p>;
+        {days.map((day) => {
+          return (
+            <DateRow date={day} />
+          );
         })}
       </div>
-      <div className="habitGrid"></div>
+      <div className="habitGrid">
+
+      </div>
     </div>
   );
 }
