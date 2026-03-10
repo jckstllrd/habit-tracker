@@ -1,34 +1,16 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router";
-import "./styles/App.css"
+import "./styles/App.css";
+import Nav from "./components/Nav";
 export default function App() {
-  const [habits, setHabits] = useState([
-    {
-      id: crypto.randomUUID(),
-      name: "no scrolling",
-      completed_today: false,
-    },
-  ]);
+  const [habits, setHabits] = useState([]);
 
   function addHabit(habit) {
     setHabits((prev) => [...prev, habit]);
   }
   return (
     <>
-      <div className="navbar">
-        <ul className="nav-links">
-          <li>
-            <Link to="/">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="add">Add Habit</Link>
-          </li>
-
-          <li>
-            <Link to="settings">Settings</Link>
-          </li>
-        </ul>
-      </div>
+      <Nav />
       <div className="app-container">
         <Outlet context={[habits, addHabit]} />
       </div>
