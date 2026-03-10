@@ -6,8 +6,10 @@ nav {
 
 .navLinks {
   margin: 0;
+  padding: 0;
   height: 100%;
   display: flex;
+  justify-content: space-evenly;
 }
 
 .navLinks li {

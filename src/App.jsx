@@ -10,7 +10,7 @@ export default function App() {
   }
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <div className="app-container">
         <Outlet context={[habits, addHabit]} />
       </div>

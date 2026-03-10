@@ -4,6 +4,8 @@
 #416165 — navbar/secondary surfaces
 #9FB1BC — muted shading, secondary text */
 
+
+
 @import "@fontsource/geist";
 :root {
   --main-background: #f4f4ed;
@@ -20,9 +22,37 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  border: 1px solid black;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
 }
 
 a {
   text-decoration: none;
   color: var(--primary-text-colour);
+}
+
+.app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    width: 80vw;
+    border: 1px solid blue;
+}
+
+.app-container > * {
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
