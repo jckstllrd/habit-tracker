@@ -1,0 +1,18 @@
+.dashboardContainer {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.month {
+  width: 100%;
+  text-align: center;
+}
+
+.habitGrid {
+  width: 100%;
+  flex: 1;
+  border: 1px solid black;
+}
