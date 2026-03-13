@@ -9,8 +9,7 @@ export default function App() {
     setHabits((prev) => [...prev, habit]);
   }
   return (
-    <>
-      {/* <Nav /> */}
+    <><Nav />
       <div className="app-container">
         <Outlet context={[habits, addHabit]} />
       </div>
