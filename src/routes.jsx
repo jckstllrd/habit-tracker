@@ -1,4 +1,4 @@
-import Dashboard from "./routes/Dashboard.jsx";
+import Dashboard from "./components/Dashboard.jsx";
 import App from "./App.jsx";
 
 const routes = [
