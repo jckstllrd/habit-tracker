@@ -4,8 +4,6 @@
 #416165 — navbar/secondary surfaces
 #9FB1BC — muted shading, secondary text */
 
-
-
 @import "@fontsource/geist";
 :root {
   --main-background: #f4f4ed;
@@ -13,46 +11,36 @@
   --pop-colour: #e71d36;
   --secondary-colour: #414165;
   --tertiary-colour: #9fb1bc;
-
   color: var(--primary-text-colour);
   font-family: "Geist", sans-serif;
 }
+
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
-  border: 1px solid black;
 }
 
 #root {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-}
-
-a {
-  text-decoration: none;
-  color: var(--primary-text-colour);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .app-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70vh;
-    width: 80vw;
-    border: 1px solid blue;
+  width: 70vw;
+  height: 80vh;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
 }
 
-.app-container > * {
-    border: 1px solid black;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.habit-cell {
+  background-color: var(--secondary-colour);
+  border: 1px solid white;
+  border-radius: 10px;
+  aspect-ratio: 1/1;
 }

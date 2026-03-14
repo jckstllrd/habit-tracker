@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router";
 import "./styles/App.css";
 export default function App() {
   const [habits, setHabits] = useState([]);
@@ -10,7 +9,13 @@ export default function App() {
   return (
     <>
       <div className="app-container">
-        <Outlet context={[habits, addHabit]} />
+        <div className="habit-cell"></div>
+        <div className="habit-cell"></div>
+        <div className="habit-cell"></div>
+        <div className="habit-cell"></div>
+        <div className="habit-cell"></div>
+        <div className="habit-cell"></div>
+        <div className="habit-cell"></div>
       </div>
     </>
   );
