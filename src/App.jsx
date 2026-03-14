@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./styles/App.css";
+import Habit from "./components/Habit";
 export default function App() {
   const [habits, setHabits] = useState([]);
 
@@ -9,13 +10,9 @@ export default function App() {
   return (
     <>
       <div className="app-container">
-        <div className="habit-cell"></div>
-        <div className="habit-cell"></div>
-        <div className="habit-cell"></div>
-        <div className="habit-cell"></div>
-        <div className="habit-cell"></div>
-        <div className="habit-cell"></div>
-        <div className="habit-cell"></div>
+        {habits.map((habit) => {
+          return <Habit key={habit.id} />;
+        })}
       </div>
     </>
   );
