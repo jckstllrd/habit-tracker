@@ -10,26 +10,6 @@ export default function App() {
       name: "running",
       log_completed: {},
     },
-    {
-      id: 0,
-      name: "running",
-      log_completed: {},
-    },
-    {
-      id: 0,
-      name: "running",
-      log_completed: {},
-    },
-    {
-      id: 0,
-      name: "running",
-      log_completed: {},
-    },
-    {
-      id: 0,
-      name: "running",
-      log_completed: {},
-    },
   ]);
   function addHabit(habit) {
     setHabits((prev) => [...prev, habit]);
