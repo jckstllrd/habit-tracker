@@ -10,6 +10,26 @@ export default function App() {
       name: "running",
       log_completed: {},
     },
+    {
+      id: 0,
+      name: "running",
+      log_completed: {},
+    },
+    {
+      id: 0,
+      name: "running",
+      log_completed: {},
+    },
+    {
+      id: 0,
+      name: "running",
+      log_completed: {},
+    },
+    {
+      id: 0,
+      name: "running",
+      log_completed: {},
+    },
   ]);
   function addHabit(habit) {
     setHabits((prev) => [...prev, habit]);
@@ -18,10 +38,15 @@ export default function App() {
   return (
     <>
       <div className="app-container">
-        {habits.map((habit) => {
-          return <Habit key={habit.id} habit={habit} />;
-        })}
-        <HabitForm addHabit={addHabit} />
+        <div className="nav-bar">
+          <div className="nav-menu">///</div>
+        </div>
+        <div className="grid-container">
+          {habits.map((habit) => {
+            return <Habit key={habit.id} habit={habit} />;
+          })}
+          <HabitForm addHabit={addHabit} />
+        </div>
       </div>
     </>
   );
