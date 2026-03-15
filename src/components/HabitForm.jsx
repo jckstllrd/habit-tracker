@@ -1,6 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 export default function HabitForm({ addHabit }) {
   const [active, setActive] = useState(false);
+  const formFocus = useRef(null);
+
+  useEffect(() => {
+    if (active == true) {
+      formFocus.current.focus();
+    }
+  }, [active]);
 
   const toggleActive = () => {
     setActive((prev) => !prev);
@@ -19,7 +26,7 @@ export default function HabitForm({ addHabit }) {
               }}
             >
               <label htmlFor="habitName">
-                <input name="habitName" id="habitName" />
+                <input ref={formFocus} name="habitName" id="habitName" />
               </label>
             </form>
           </div>
