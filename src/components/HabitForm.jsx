@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function HabitForm() {
+export default function HabitForm({ addHabit }) {
   const [active, setActive] = useState(false);
 
   const toggleActive = () => {
@@ -14,6 +14,8 @@ export default function HabitForm() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                addHabit(e.target.habitName.value);
+                toggleActive();
               }}
             >
               <label htmlFor="habitName">

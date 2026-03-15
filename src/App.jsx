@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./styles/App.css";
 import Habit from "./components/Habit";
 import HabitForm from "./components/HabitForm";
@@ -11,7 +11,15 @@ export default function App() {
       log_completed: {},
     },
   ]);
-  function addHabit(habit) {
+  let id = useRef(1);
+
+  function addHabit(habitName) {
+    let habit = {
+      id: id,
+      name: habitName,
+      log_completed: [],
+    };
+    id.current = id.current + 1;
     setHabits((prev) => [...prev, habit]);
   }
 
