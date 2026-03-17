@@ -27,6 +27,7 @@ export default function App() {
     <>
       <div className="app-container">
         <div className="nav-bar">
+          <h1 className="app-header">habits</h1>
           <div className="nav-menu">///</div>
         </div>
         <div className="grid-container">
