@@ -1,4 +1,9 @@
-export default function Habit({ habit }) {
+export default function Habit({ habit, logHabit }) {
+  let streak = 0;
+  let today = new Date().toISOString().split("T")[0];
+  if (habit.log_completed[-1] === today) {
+    streak += 1;
+  }
   return (
     <div className="habit-cell">
       <div className="habit-content">
@@ -8,7 +13,15 @@ export default function Habit({ habit }) {
         </div>
         <div className="habit-completion">
           <div className="habit-chart"></div>
-          <p className="habitStreak">Streak: 0</p>
+          <button
+            className="log-habit"
+            onClick={() => {
+              logHabit(habit.id);
+            }}
+          >
+            Log Habit
+          </button>
+          <p className="habitStreak">{streak}</p>
         </div>
       </div>
     </div>

@@ -13,6 +13,8 @@ export default function App() {
   ]);
   let id = useRef(1);
 
+  console.log(habits);
+
   function addHabit(habitName) {
     let habit = {
       id: id,
@@ -21,6 +23,16 @@ export default function App() {
     };
     id.current = id.current + 1;
     setHabits((prev) => [...prev, habit]);
+  }
+  function logHabit(habitId) {
+    let date = new Date().toISOString().split("T")[0];
+    setHabits((prev) =>
+      prev.map((habit) =>
+        habit.id === habitId
+          ? { ...habit, log_completed: [...habit.log_completed, date] }
+          : habit,
+      ),
+    );
   }
 
   return (
@@ -32,7 +44,7 @@ export default function App() {
         </div>
         <div className="grid-container">
           {habits.map((habit) => {
-            return <Habit key={habit.id} habit={habit} />;
+            return <Habit key={habit.id} habit={habit} logHabit={logHabit} />;
           })}
           <HabitForm addHabit={addHabit} />
         </div>
