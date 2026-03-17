@@ -63,10 +63,32 @@ body {
 
 .habit-content {
   padding: 1.1rem;
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.habit-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.habit-options {
+  color: var(--main-background);
+  border: none;
+  font-weight: 700;
+  background: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-left: 10px;
 }
 
 .habit-name {

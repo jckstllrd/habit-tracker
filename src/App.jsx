@@ -8,7 +8,7 @@ export default function App() {
     {
       id: 0,
       name: "running",
-      log_completed: {},
+      log_completed: [],
     },
   ]);
   let id = useRef(1);
