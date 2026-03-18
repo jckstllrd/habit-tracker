@@ -16,7 +16,7 @@ export default function App() {
 
   function addHabit(habitName) {
     let habit = {
-      id: id,
+      id: id.current,
       name: habitName,
       log_completed: [],
       streak: 0,
@@ -43,6 +43,10 @@ export default function App() {
     );
   }
 
+  function removeHabit(habitId) {
+    setHabits(habits.filter((habit) => habit.id != habitId));
+  }
+
   return (
     <>
       <div className="app-container">
@@ -52,7 +56,14 @@ export default function App() {
         </div>
         <div className="grid-container">
           {habits.map((habit) => {
-            return <Habit key={habit.id} habit={habit} logHabit={logHabit} />;
+            return (
+              <Habit
+                key={habit.id}
+                habit={habit}
+                removeHabit={removeHabit}
+                logHabit={logHabit}
+              />
+            );
           })}
           <HabitForm addHabit={addHabit} />
         </div>
