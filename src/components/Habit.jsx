@@ -19,9 +19,9 @@ export default function Habit({ habit, logHabit }) {
               logHabit(habit.id);
             }}
           >
-            Log Habit
+            Log Habit Today
           </button>
-          <p className="habitStreak">{streak}</p>
+          <p className="habitStreak">{habit.streak}</p>
         </div>
       </div>
     </div>

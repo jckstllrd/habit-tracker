@@ -9,6 +9,7 @@ export default function App() {
       id: 0,
       name: "running",
       log_completed: [],
+      streak: 0,
     },
   ]);
   let id = useRef(1);
@@ -20,18 +21,27 @@ export default function App() {
       id: id,
       name: habitName,
       log_completed: [],
+      streak: 0,
     };
     id.current = id.current + 1;
     setHabits((prev) => [...prev, habit]);
   }
   function logHabit(habitId) {
-    let date = new Date().toISOString().split("T")[0];
+    let today = new Date().toISOString().split("T")[0];
     setHabits((prev) =>
-      prev.map((habit) =>
-        habit.id === habitId
-          ? { ...habit, log_completed: [...habit.log_completed, date] }
-          : habit,
-      ),
+      prev.map((habit) => {
+        if (habit.id === habitId) {
+          if (habit.log_completed.at(-1) != today) {
+            let newStreak = habit.streak + 1;
+            return {
+              ...habit,
+              log_completed: [...habit.log_completed, today],
+              streak: newStreak,
+            };
+          }
+        }
+        return habit;
+      }),
     );
   }
 
