@@ -1,18 +1,22 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./styles/App.css";
 import Habit from "./components/Habit";
 import HabitForm from "./components/HabitForm";
 
 export default function App() {
-  const [habits, setHabits] = useState([
-    {
-      id: 0,
-      name: "running",
-      log_completed: [],
-      streak: 0,
-    },
-  ]);
-  let id = useRef(1);
+  const [habits, setHabits] = useState(
+    () =>
+      JSON.parse(localStorage.getItem("habits")) ?? [
+        {
+          id: 0,
+          name: "running",
+          log_completed: [],
+          streak: 0,
+        },
+      ],
+  );
+  console.log(habits);
+  let id = useRef(JSON.parse(localStorage.getItem("currentId")) ?? 1);
 
   function addHabit(habitName) {
     let habit = {
@@ -46,6 +50,10 @@ export default function App() {
   function removeHabit(habitId) {
     setHabits(habits.filter((habit) => habit.id != habitId));
   }
+  useEffect(() => {
+    localStorage.setItem("habits", JSON.stringify(habits));
+    localStorage.setItem("currentId", JSON.stringify(id.current));
+  }, [habits]);
 
   return (
     <>
