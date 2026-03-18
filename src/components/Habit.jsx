@@ -1,9 +1,4 @@
 export default function Habit({ habit, logHabit }) {
-  let streak = 0;
-  let today = new Date().toISOString().split("T")[0];
-  if (habit.log_completed[-1] === today) {
-    streak += 1;
-  }
   return (
     <div className="habit-cell">
       <div className="habit-content">

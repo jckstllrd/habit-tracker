@@ -14,8 +14,6 @@ export default function App() {
   ]);
   let id = useRef(1);
 
-  console.log(habits);
-
   function addHabit(habitName) {
     let habit = {
       id: id,
