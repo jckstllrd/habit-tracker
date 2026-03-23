@@ -15,7 +15,6 @@ export default function App() {
         },
       ],
   );
-  console.log(habits);
   let id = useRef(JSON.parse(localStorage.getItem("currentId")) ?? 1);
 
   function addHabit(habitName) {
@@ -27,6 +26,19 @@ export default function App() {
     };
     id.current = id.current + 1;
     setHabits((prev) => [...prev, habit]);
+  }
+  function updateHabit(habitId, habitName) {
+    setHabits((prev) =>
+      prev.map((habit) => {
+        if (habit.id === habitId) {
+          return {
+            ...habit,
+            name: habitName,
+          };
+        }
+        return habit;
+      }),
+    );
   }
   function logHabit(habitId) {
     let today = new Date().toISOString().split("T")[0];
@@ -68,6 +80,7 @@ export default function App() {
               <Habit
                 key={habit.id}
                 habit={habit}
+                updateHabit={updateHabit}
                 removeHabit={removeHabit}
                 logHabit={logHabit}
               />
