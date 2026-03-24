@@ -3,6 +3,14 @@ import "./styles/App.css";
 import Habit from "./components/Habit";
 import HabitForm from "./components/HabitForm";
 
+import axios from "axios";
+
+const apiCall = () => {
+  axios.get("https://localhost:8080").then((data) => {
+    console.log(data);
+  });
+};
+
 export default function App() {
   const [habits, setHabits] = useState(
     () =>
@@ -71,7 +79,9 @@ export default function App() {
     <>
       <div className="app-container">
         <div className="nav-bar">
-          <h1 className="app-header">habits</h1>
+          <h1 className="app-header" onClick={apiCall}>
+            habits
+          </h1>
           <div className="nav-menu">///</div>
         </div>
         <div className="grid-container">
