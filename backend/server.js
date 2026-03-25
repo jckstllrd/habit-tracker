@@ -16,7 +16,7 @@ app.get("/habits/:id", (req, res) => {
 });
 
 app.get("/api/test", (req, res) => {
-  res.send("access successful");
+  res.send({ message: "success" });
 });
 
 app.listen(8080, () => {

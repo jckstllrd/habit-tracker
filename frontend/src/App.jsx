@@ -41,7 +41,7 @@ export default function App() {
             ///
           </div>
         </div>
-        <div className="grid-container">{data}</div>
+        <div className="grid-container">{data.message}</div>
       </div>
     </>
   );
