@@ -3,85 +3,32 @@ import "./styles/App.css";
 import Habit from "./components/Habit";
 import HabitForm from "./components/HabitForm";
 
-import axios from "axios";
-
-const apiCall = () => {
-  axios.get("http://localhost:8080").then((data) => {
-    console.log(data);
-  });
-};
-
 export default function App() {
-  const [habits, setHabits] = useState(
-    () =>
-      JSON.parse(localStorage.getItem("habits")) ?? [
-        {
-          id: 0,
-          name: "running",
-          log_completed: [],
-          streak: 0,
-        },
-      ],
-  );
-  let id = useRef(JSON.parse(localStorage.getItem("currentId")) ?? 1);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  function addHabit(habitName) {
-    let habit = {
-      id: id.current,
-      name: habitName,
-      log_completed: [],
-      streak: 0,
-    };
-    id.current = id.current + 1;
-    setHabits((prev) => [...prev, habit]);
-  }
-  function updateHabit(habitId, habitName) {
-    setHabits((prev) =>
-      prev.map((habit) => {
-        if (habit.id === habitId) {
-          return {
-            ...habit,
-            name: habitName,
-          };
-        }
-        return habit;
-      }),
-    );
-  }
-  function logHabit(habitId) {
-    let today = new Date().toISOString().split("T")[0];
-    setHabits((prev) =>
-      prev.map((habit) => {
-        if (habit.id === habitId) {
-          if (habit.log_completed.at(-1) != today) {
-            let newStreak = habit.streak + 1;
-            return {
-              ...habit,
-              log_completed: [...habit.log_completed, today],
-              streak: newStreak,
-            };
-          }
-        }
-        return habit;
-      }),
-    );
-  }
-
-  function removeHabit(habitId) {
-    setHabits(habits.filter((habit) => habit.id != habitId));
-  }
   useEffect(() => {
-    localStorage.setItem("habits", JSON.stringify(habits));
-    localStorage.setItem("currentId", JSON.stringify(id.current));
-  }, [habits]);
-
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/test");
+        if (!response.ok) throw new Error("failed to fetch");
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        setError(err.message);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     <>
       <div className="app-container">
         <div className="nav-bar">
-          <h1 className="app-header" onClick={apiCall}>
-            habits
-          </h1>
+          <h1 className="app-header">habits</h1>
           <div
             className="nav-menu"
             onClick={() => {
@@ -94,20 +41,7 @@ export default function App() {
             ///
           </div>
         </div>
-        <div className="grid-container">
-          {habits.map((habit) => {
-            return (
-              <Habit
-                key={habit.id}
-                habit={habit}
-                updateHabit={updateHabit}
-                removeHabit={removeHabit}
-                logHabit={logHabit}
-              />
-            );
-          })}
-          <HabitForm addHabit={addHabit} />
-        </div>
+        <div className="grid-container">{data}</div>
       </div>
     </>
   );

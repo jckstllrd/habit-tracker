@@ -15,6 +15,10 @@ app.get("/habits/:id", (req, res) => {
   res.send("");
 });
 
+app.get("/api/test", (req, res) => {
+  res.send("access successful");
+});
+
 app.listen(8080, () => {
   console.log("server listening on port 8080");
 });
