@@ -6,7 +6,7 @@ import HabitForm from "./components/HabitForm";
 import axios from "axios";
 
 const apiCall = () => {
-  axios.get("https://localhost:8080").then((data) => {
+  axios.get("http://localhost:8080").then((data) => {
     console.log(data);
   });
 };
@@ -82,7 +82,17 @@ export default function App() {
           <h1 className="app-header" onClick={apiCall}>
             habits
           </h1>
-          <div className="nav-menu">///</div>
+          <div
+            className="nav-menu"
+            onClick={() => {
+              // toggle sidebar to pop into view
+              // show list of areas you can navigate on the page
+              // should be a dialog box?
+              //
+            }}
+          >
+            ///
+          </div>
         </div>
         <div className="grid-container">
           {habits.map((habit) => {
