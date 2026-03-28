@@ -3,6 +3,7 @@ import cors from "cors";
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("");
@@ -16,9 +17,11 @@ app.get("/habits/:id", (req, res) => {
 });
 
 app.get("/api/test", (req, res) => {
-  res.send({ message: "success" });
+  res.json({ message: "success" });
 });
 
-app.listen(8080, () => {
-  console.log("server listening on port 8080");
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`server listening on port ${PORT}`);
 });
