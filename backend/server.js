@@ -17,6 +17,7 @@ app.get("/habits/:id", (req, res) => {
 });
 
 app.get("/api/test", (req, res) => {
+  console.log("here");
   res.json({ message: "success" });
 });
 

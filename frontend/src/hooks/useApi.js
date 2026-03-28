@@ -8,14 +8,16 @@ const useApi = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/test");
-        if (!response.ok) throw new Error("failed to fetch");
+        const response = await fetch(url);
+        if (!response.ok)
+          throw new Error(`HTTP Error! Status: ${response.status}`);
         const result = await response.json();
         setData(result);
       } catch (err) {
         setError(err.message);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchData();
   }, [url]);
