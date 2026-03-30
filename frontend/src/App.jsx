@@ -2,7 +2,7 @@ import "./styles/App.css";
 import useApi from "./hooks/useApi";
 
 export default function App() {
-  const { data, loading, error } = useApi("http://localhost:8080/api/test");
+  const { data, loading, error } = useApi("http://localhost:8080/");
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}, hitting errors up in here</div>;
   return (

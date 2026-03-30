@@ -6,10 +6,15 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("");
+  console.log("habits dashboard will appear here - wip");
+  res.json({ message: "home success" });
 });
-app.get("/habits", (req, res) => {
-  res.send("");
+app.get("/new", (req, res) => {
+  console.log("display a form for adding in new habits");
+});
+
+app.post("/new", (req, res) => {
+  console.log("habits to be saved here: ", req, body.habitName);
 });
 
 app.get("/habits/:id", (req, res) => {
