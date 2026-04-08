@@ -14,7 +14,7 @@ app.get("/new", (req, res) => {
 });
 
 app.post("/new", (req, res) => {
-  console.log("habits to be saved here: ", req, body.habitName);
+  console.log("habits to be saved here: ", req.body.habitName);
 });
 
 app.get("/habits/:id", (req, res) => {
