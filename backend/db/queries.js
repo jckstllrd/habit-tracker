@@ -5,8 +5,8 @@ async function getAllHabits() {
   return rows;
 }
 
-async function insertHabit(habit) {
-  await pool.query("INSERT INTO habits (habit) VALUES ($1)", [habit]);
+async function insertHabit(habitName) {
+  await pool.query("INSERT INTO habits (habit) VALUES ($1)", [habitName]);
 }
 
 module.exports = {
