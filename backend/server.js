@@ -4,6 +4,11 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+);
 
 app.get("/", (req, res) => {
   console.log("habits dashboard will appear here - wip");
