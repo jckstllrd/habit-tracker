@@ -64,4 +64,7 @@ module.exports = {
   getAllUsers,
   getAllHabits,
   insertHabit,
+  createUser,
+  updateUser,
+  deleteUser,
 };
