@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import * as db from "./db/queries.js";
 const app = express();
 
 app.use(cors());
@@ -14,6 +15,11 @@ app.get("/", (req, res) => {
   console.log("habits dashboard will appear here - wip");
   res.json({ message: "home success" });
 });
+
+app.get("/users", db.getAllUsers);
+app.post("/users", db.createUser);
+app.put("/users/:id", db.updateUser);
+app.delete("/users/:id", db.deleteUser);
 
 const PORT = process.env.PORT || 8080;
 
