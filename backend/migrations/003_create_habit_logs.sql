@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS habit_logs (
   id SERIAL PRIMARY KEY,
-  habit_id INTEGER NOT NULL REFERENCES habits(id),
+  habit_id INTEGER NOT NULL REFERENCES habits(id) ON DELETE CASCADE,
   logged_on DATE,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 )

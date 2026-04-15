@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS habits (
   id SERIAL PRIMARY KEY,
   name varchar(30) NOT NULL,
-  user_id INTEGER NOT NULL REFERENCES users(id),   
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,   
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
