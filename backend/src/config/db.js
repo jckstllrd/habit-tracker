@@ -8,5 +8,3 @@ export const pool = new Pool({
 pool.on("error", (err) => {
   console.error("unexpected pg error", err);
 });
-
-export default pool;
