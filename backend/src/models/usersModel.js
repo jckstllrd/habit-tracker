@@ -1,13 +1,11 @@
-const pool = require("./pool");
-
+import pool from "../config/db.js";
 const getAllUsers = async (req, res) => {
   try {
     const results = await pool.query("SELECT * FROM users");
-    response.status(200).json(results.rows);
+    res.status(200).json(results.rows);
   } catch (error) {
     throw error;
   }
-  return rows;
 };
 
 const createUser = async (req, res) => {
@@ -25,15 +23,14 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const id = parseInd(req.params.id, 10);
+  const id = parseInt(req.params.id, 10);
   const { username, email } = req.body;
 
   try {
-    await pool.query("UPDATE users SET username = $1, email = $2, id = $3", [
-      username,
-      email,
-      id,
-    ]);
+    await pool.query(
+      "UPDATE users SET username = $1, email = $2, id = $3 WHERE id = $3",
+      [username, email, id],
+    );
     res.status(200).send(`User modified with ID: ${id}`);
   } catch (error) {
     throw error;
@@ -51,20 +48,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-async function getAllHabits() {
-  const { rows } = await pool.query("SELECT * FROM habits");
-  return rows;
-}
-
-async function insertHabit(habitName) {
-  await pool.query("INSERT INTO habits (habit) VALUES ($1)", [habitName]);
-}
-
-module.exports = {
-  getAllUsers,
-  getAllHabits,
-  insertHabit,
-  createUser,
-  updateUser,
-  deleteUser,
-};
+export { getAllUsers, createUser, updateUser, deleteUser };

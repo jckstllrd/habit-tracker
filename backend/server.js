@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import * as db from "./db/queries.js";
+import * as db from "./src/models/usersModel.js";
 const app = express();
 
 app.use(cors());
