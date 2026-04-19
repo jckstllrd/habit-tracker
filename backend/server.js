@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import userRouter from "./src/routes/userRouter.js";
+import usersRouter from "./src/routes/userRouter.js";
 import habitsRouter from "./src/routes/habitsRouter.js";
 const app = express();
 
@@ -17,8 +17,8 @@ app.get("/", (req, res) => {
   res.json({ message: "home success" });
 });
 
-app.use("/users", userRouter);
-app.user("/habits", habitsRouter);
+app.use("/users", usersRouter);
+app.use("/habits", habitsRouter);
 
 const PORT = process.env.PORT || 8080;
 
