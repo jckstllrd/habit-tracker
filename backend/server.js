@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import * as db from "./src/models/usersModel.js";
+import userRouter from "./src/routes/userRouter.js";
 const app = express();
 
 app.use(cors());
@@ -16,10 +16,7 @@ app.get("/", (req, res) => {
   res.json({ message: "home success" });
 });
 
-app.get("/users", db.getAllUsers);
-app.post("/users", db.createUser);
-app.put("/users/:id", db.updateUser);
-app.delete("/users/:id", db.deleteUser);
+app.use("/users", userRouter);
 
 const PORT = process.env.PORT || 8080;
 
