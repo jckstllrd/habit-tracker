@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import usersRouter from "./src/routes/userRouter.js";
+import usersRouter from "./src/routes/usersRouter.js";
 import habitsRouter from "./src/routes/habitsRouter.js";
 import habitLogsRouter from "./src/routes/habitLogsRouter.js";
 const app = express();
