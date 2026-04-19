@@ -8,6 +8,16 @@ const getAllUsers = async (req, res) => {
     res.status(500).send("Internal sever error");
   }
 };
+const getUserById = async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+
+  try {
+    const user = await db.getUserById(id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).send("Internal sever error");
+  }
+};
 
 const createUser = async (req, res) => {
   const { username, email } = req.body;
@@ -41,4 +51,4 @@ const deleteUser = async (req, res) => {
   }
 };
 
-export { getAllUsers, createUser, updateUser, deleteUser };
+export { getAllUsers, getUserById, createUser, updateUser, deleteUser };

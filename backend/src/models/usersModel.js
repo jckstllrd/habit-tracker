@@ -9,6 +9,15 @@ const getAllUsers = async () => {
   }
 };
 
+const getUserById = async (id) => {
+  try {
+    const results = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+    return results.rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const createUser = async (username, email) => {
   try {
     const results = await pool.query(
@@ -40,4 +49,4 @@ const deleteUser = async (id) => {
   }
 };
 
-export { getAllUsers, createUser, updateUser, deleteUser };
+export { getAllUsers, getUserById, createUser, updateUser, deleteUser };
