@@ -1,16 +1,16 @@
 import { Router } from "express";
+import * as habitLogsController from "../controllers/habitLogsController.js";
 
 const habitLogsRouter = Router();
 
-habitLogsRouter.get("/", (req, res) => res.send("get all logs"));
-habitLogsRouter.post("/habit/:habitId", (req, res) =>
-  res.send("add new log for habit"),
+habitLogsRouter.get("/", habitLogsController.getAllHabitLogs);
+habitLogsRouter.get(
+  "/habit/:habitId",
+  habitLogsController.getAllHabitLogsByHabitId,
 );
-habitLogsRouter.get("/habit/:habitId", (req, res) =>
-  res.send("get all logs from a habit"),
-);
-habitLogsRouter.get("/:id", (req, res) => res.send("get a log by id"));
-habitLogsRouter.put("/:id", (req, res) => res.send("update habit log"));
-habitLogsRouter.delete("/:id", (req, res) => res.send("delete habit log"));
+habitLogsRouter.post("/:id", habitLogsController.createHabitLog);
+habitLogsRouter.get("/:id", habitLogsController.getHabitLogById);
+habitLogsRouter.put("/:id", habitLogsController.updateHabitLog);
+habitLogsRouter.delete("/:id", habitLogsController.deleteHabitLog);
 
 export default habitLogsRouter;
