@@ -23,7 +23,7 @@ const createUser = async (req, res) => {
   const { username, email } = req.body;
   try {
     const results = await db.createUser(username, email);
-    res.status(201).json({ id: results.rows[0].id });
+    res.status(201).json({ id: results[0].id });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }

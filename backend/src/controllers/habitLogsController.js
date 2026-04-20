@@ -34,7 +34,7 @@ const createHabitLog = async (req, res) => {
   const { habit_id, logged_on } = req.body;
   try {
     const results = await db.createHabitLog(habit_id, logged_on);
-    res.status(201).json({ id: results.rows[0].id });
+    res.status(201).json({ id: results[0].id });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
