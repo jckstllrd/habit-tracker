@@ -38,7 +38,7 @@ const createHabit = async (name, userId) => {
       "INSERT INTO habits (name, user_id) VALUES ($1, $2) RETURNING *",
       [name, userId],
     );
-    return results;
+    return results.rows;
   } catch (error) {
     throw error;
   }

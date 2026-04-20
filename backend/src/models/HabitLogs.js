@@ -26,7 +26,7 @@ const getAllHabitLogsByHabitId = async (habitId) => {
       "SELECT * FROM habit_logs WHERE habit_id = $1",
       [habitId],
     );
-    return results;
+    return results.rows;
   } catch (error) {
     throw error;
   }

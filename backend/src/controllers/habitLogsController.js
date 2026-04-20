@@ -10,7 +10,7 @@ const getAllHabitLogs = async (req, res) => {
 };
 
 const getAllHabitLogsByHabitId = async (req, res) => {
-  const habitId = parseInt(req.params.id, 10);
+  const habitId = parseInt(req.params.habitId, 10);
   try {
     const habitLogsByHabitId = await db.getAllHabitLogsByHabitId(habitId);
     res.status(200).json(habitLogsByHabitId);
@@ -34,7 +34,7 @@ const createHabitLog = async (req, res) => {
   const { habit_id, logged_on } = req.body;
   try {
     const results = await db.createHabitLog(habit_id, logged_on);
-    res.status(200).json({ id: results.rows[0].id });
+    res.status(201).json({ id: results.rows[0].id });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }

@@ -24,7 +24,7 @@ const createUser = async (username, email) => {
       "INSERT INTO users (username, email) VALUES ($1, $2) RETURNING *",
       [username, email],
     );
-    return results;
+    return results.rows;
   } catch (error) {
     throw error;
   }

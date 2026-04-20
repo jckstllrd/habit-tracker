@@ -34,7 +34,7 @@ const createHabit = async (req, res) => {
   const { name, userId } = req.body;
   try {
     const results = await db.createHabit(name, userId);
-    res.status(200).json({ id: results.rows[0].id });
+    res.status(201).json({ id: results.rows[0].id });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }

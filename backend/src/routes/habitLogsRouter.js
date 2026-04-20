@@ -8,7 +8,7 @@ habitLogsRouter.get(
   "/habit/:habitId",
   habitLogsController.getAllHabitLogsByHabitId,
 );
-habitLogsRouter.post("/:id", habitLogsController.createHabitLog);
+habitLogsRouter.post("/", habitLogsController.createHabitLog);
 habitLogsRouter.get("/:id", habitLogsController.getHabitLogById);
 habitLogsRouter.put("/:id", habitLogsController.updateHabitLog);
 habitLogsRouter.delete("/:id", habitLogsController.deleteHabitLog);
