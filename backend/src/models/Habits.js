@@ -9,6 +9,18 @@ const getAllHabits = async () => {
   }
 };
 
+const getAllHabitsByUser = async (userId) => {
+  try {
+    const results = await pool.query(
+      "SELECT * FROM habits WHERE user_id = $1",
+      [userId],
+    );
+    return results.rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getHabitById = async (id) => {
   try {
     const results = await pool.query("SELECT * FROM habits WHERE id = $1", [
@@ -48,4 +60,11 @@ const deleteHabit = async (id) => {
   }
 };
 
-export { getAllHabits, getHabitById, createHabit, updateHabit, deleteHabit };
+export {
+  getAllHabits,
+  getHabitById,
+  createHabit,
+  updateHabit,
+  deleteHabit,
+  getAllHabitsByUser,
+};

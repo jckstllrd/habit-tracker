@@ -9,6 +9,16 @@ const getAllHabits = async (req, res) => {
   }
 };
 
+const getAllHabitsByUser = async (req, res) => {
+  const userId = parseInt(req.params.userId, 10);
+  try {
+    const habits = await db.getAllHabitsByUser(userId);
+    res.status(200).json(habits);
+  } catch (error) {
+    res.status(500).send("Internal server error");
+  }
+};
+
 const getHabitById = async (req, res) => {
   const id = parseInt(req.params.id, 10);
 
@@ -21,8 +31,7 @@ const getHabitById = async (req, res) => {
 };
 
 const createHabit = async (req, res) => {
-  const userId = parseInt(req.params.id, 10);
-  const { name } = req.body;
+  const { name, userId } = req.body;
   try {
     const results = await db.createHabit(name, userId);
     res.status(201).send(`Habit added with ID: ${results.rows[0].id}`);
@@ -53,4 +62,11 @@ const deleteHabit = async (req, res) => {
   }
 };
 
-export { getAllHabits, getHabitById, createHabit, updateHabit, deleteHabit };
+export {
+  getAllHabits,
+  getHabitById,
+  createHabit,
+  updateHabit,
+  deleteHabit,
+  getAllHabitsByUser,
+};
