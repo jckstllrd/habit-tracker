@@ -1,4 +1,4 @@
-import * as db from "../models/usersModel.js";
+import * as db from "../models/Users.js";
 
 const getAllUsers = async (req, res) => {
   try {
