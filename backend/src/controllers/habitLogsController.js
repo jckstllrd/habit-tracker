@@ -5,7 +5,7 @@ const getAllHabitLogs = async (req, res) => {
     const habitLogs = await db.getAllHabitLogs();
     res.status(200).json(habitLogs);
   } catch (error) {
-    res.status(500).send("Internal sever error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -15,7 +15,7 @@ const getAllHabitLogsByHabitId = async (req, res) => {
     const habitLogsByHabitId = await db.getAllHabitLogsByHabitId(habitId);
     res.status(200).json(habitLogsByHabitId);
   } catch (error) {
-    res.status(500).send("Internal sever error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -26,7 +26,7 @@ const getHabitLogById = async (req, res) => {
     const habitLog = await db.getHabitLogById(id);
     res.status(200).json(habitLog);
   } catch (error) {
-    res.status(500).send("Internal sever error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -34,9 +34,9 @@ const createHabitLog = async (req, res) => {
   const { habit_id, logged_on } = req.body;
   try {
     const results = await db.createHabitLog(habit_id, logged_on);
-    res.status(201).send(`Habit log added with ID: ${results.rows[0].id}`);
+    res.status(200).json({ id: results.rows[0].id });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -46,9 +46,9 @@ const updateHabitLog = async (req, res) => {
 
   try {
     await db.updateHabitLog(id, logged_on, habit_id);
-    res.status(200).send(`Habit log modified with ID: ${id}`);
+    res.status(200).json({ id: id });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -56,9 +56,9 @@ const deleteHabitLog = async (req, res) => {
   const id = parseInt(req.params.id, 10);
   try {
     await db.deleteHabitLog(id);
-    res.status(200).send(`Habit log deleted with ID:${id}`);
+    res.status(200).json({ id: id });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 

@@ -5,7 +5,7 @@ const getAllUsers = async (req, res) => {
     const users = await db.getAllUsers();
     res.status(200).json(users);
   } catch (error) {
-    res.status(500).send("Internal sever error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 const getUserById = async (req, res) => {
@@ -15,7 +15,7 @@ const getUserById = async (req, res) => {
     const user = await db.getUserById(id);
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).send("Internal sever error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -23,9 +23,9 @@ const createUser = async (req, res) => {
   const { username, email } = req.body;
   try {
     const results = await db.createUser(username, email);
-    res.status(201).send(`User added with ID: ${results.rows[0].id}`);
+    res.status(201).json({ id: results.rows[0].id });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -35,9 +35,9 @@ const updateUser = async (req, res) => {
 
   try {
     await db.updateUser(id, username, email);
-    res.status(200).send(`User modified with ID: ${id}`);
+    res.status(200).json({ id: id });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -45,9 +45,9 @@ const deleteUser = async (req, res) => {
   const id = parseInt(req.params.id, 10);
   try {
     await db.deleteUser(id);
-    res.status(200).send(`User deleted with ID:${id}`);
+    res.status(200).json({ id: id });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 

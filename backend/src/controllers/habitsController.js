@@ -5,7 +5,7 @@ const getAllHabits = async (req, res) => {
     const habits = await db.getAllHabits();
     res.status(200).json(habits);
   } catch (error) {
-    res.status(500).send("Internal sever error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -15,7 +15,7 @@ const getAllHabitsByUser = async (req, res) => {
     const habits = await db.getAllHabitsByUser(userId);
     res.status(200).json(habits);
   } catch (error) {
-    res.status(500).send("Internal server error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -26,7 +26,7 @@ const getHabitById = async (req, res) => {
     const habit = await db.getHabitById(id);
     res.status(200).json(habit);
   } catch (error) {
-    res.status(500).send("Internal sever error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -34,9 +34,9 @@ const createHabit = async (req, res) => {
   const { name, userId } = req.body;
   try {
     const results = await db.createHabit(name, userId);
-    res.status(201).send(`Habit added with ID: ${results.rows[0].id}`);
+    res.status(200).json({ id: results.rows[0].id });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -46,9 +46,9 @@ const updateHabit = async (req, res) => {
 
   try {
     await db.updateHabit(id, name);
-    res.status(200).send(`Habit modified with ID: ${id}`);
+    res.status(200).json({ id: id });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -56,9 +56,9 @@ const deleteHabit = async (req, res) => {
   const id = parseInt(req.params.id, 10);
   try {
     await db.deleteHabit(id);
-    res.status(200).send(`Habit deleted with ID:${id}`);
+    res.status(200).json({ id: id });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
