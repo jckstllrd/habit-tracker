@@ -1,6 +1,7 @@
 import * as db from "../models/Habits.js";
 
 const getAllHabits = async (req, res) => {
+  console.log("getting habits");
   try {
     const habits = await db.getAllHabits();
     res.status(200).json(habits);
