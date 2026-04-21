@@ -1,13 +1,18 @@
 import "./styles/App.css";
 import { useEffect, useState } from "react";
-import { deleteHabit, getAllHabits } from "./services/habits";
+import {
+  createHabit,
+  deleteHabit,
+  getAllHabitsByUser,
+} from "./services/habits";
 
 export default function App() {
   const [habits, setHabits] = useState([]);
+  const [name, setName] = useState("");
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    getAllHabits().then((data) => {
+    getAllHabitsByUser().then((data) => {
       console.log(data);
       setHabits(data);
     });
@@ -16,6 +21,14 @@ export default function App() {
   const handleDelete = (habit) => {
     deleteHabit(habit.id).then(() => {
       setRefresh(!refresh);
+    });
+  };
+  const handleAdd = (event) => {
+    event.preventDefault();
+    console.log(name);
+    createHabit(name).then(() => {
+      setRefresh(!refresh);
+      setName("");
     });
   };
 
@@ -27,6 +40,15 @@ export default function App() {
           <div>///</div>
         </div>
         <div className="grid-container">
+          <form onSubmit={handleAdd}>
+            <input
+              required
+              type="text"
+              onChange={(event) => setName(event.target.value)}
+              value={name}
+            ></input>
+            <button type="submit">Add Habit</button>
+          </form>
           {habits.map((habit) => (
             <li key={habit.id}>
               {habit.name}
