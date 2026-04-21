@@ -1,7 +1,6 @@
 import "./styles/App.css";
-import useApi from "./hooks/useApi";
 import { useEffect, useState } from "react";
-import { getAllHabits } from "./services/habits";
+import { deleteHabit, getAllHabits } from "./services/habits";
 
 export default function App() {
   const [habits, setHabits] = useState([]);
@@ -13,6 +12,13 @@ export default function App() {
       setHabits(data);
     });
   }, [refresh]);
+
+  const handleDelete = (habit) => {
+    deleteHabit(habit.id).then(() => {
+      setRefresh(!refresh);
+    });
+  };
+
   return (
     <>
       <div className="app-container">
@@ -22,7 +28,10 @@ export default function App() {
         </div>
         <div className="grid-container">
           {habits.map((habit) => (
-            <li key={habit.id}>{habit.name}</li>
+            <li key={habit.id}>
+              {habit.name}
+              <button onClick={() => handleDelete(habit)}>Delete</button>
+            </li>
           ))}
         </div>
       </div>
