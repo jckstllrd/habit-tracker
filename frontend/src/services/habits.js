@@ -10,7 +10,10 @@ export const getAllHabitsByUser = () =>
 export const createHabit = (name) =>
   fetch(basepath, {
     method: "POST",
-    body: JSON.stringify({ name }),
+    body: JSON.stringify({ name, userId }),
+    headers: {
+      "content-type": "application/json",
+    },
   });
 
 export const deleteHabit = (habitId) =>
