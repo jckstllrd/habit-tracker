@@ -32,10 +32,12 @@ const getHabitLogById = async (req, res) => {
 
 const createHabitLog = async (req, res) => {
   const { habit_id, logged_on } = req.body;
+  console.log(habit_id, logged_on);
   try {
     const results = await db.createHabitLog(habit_id, logged_on);
     res.status(201).json({ id: results[0].id });
   } catch (error) {
+    console.log("about to send an error");
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
@@ -54,6 +56,7 @@ const updateHabitLog = async (req, res) => {
 
 const deleteHabitLog = async (req, res) => {
   const id = parseInt(req.params.id, 10);
+  console.log("deleting log of id: ", id);
   try {
     await db.deleteHabitLog(id);
     res.status(200).json({ id: id });

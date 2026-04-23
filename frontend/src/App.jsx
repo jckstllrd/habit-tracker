@@ -5,16 +5,24 @@ import {
   deleteHabit,
   getAllHabitsByUser,
 } from "./services/habits";
+import {
+  createHabitLog,
+  deleteHabitLog,
+  getAllHabitLogs,
+} from "./services/habitLogs";
 
 export default function App() {
   const [habits, setHabits] = useState([]);
+  const [logs, setLogs] = useState([]);
   const [name, setName] = useState("");
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     getAllHabitsByUser().then((data) => {
-      console.log(data);
       setHabits(data);
+    });
+    getAllHabitLogs().then((data) => {
+      setLogs(data);
     });
   }, [refresh]);
 
@@ -25,13 +33,43 @@ export default function App() {
   };
   const handleAdd = (event) => {
     event.preventDefault();
-    console.log(name);
     createHabit(name).then(() => {
       setRefresh(!refresh);
       setName("");
     });
   };
+  const handleDeleteLog = (habit) => {
+    const log = logs.find((log) => {
+      const date = new Date().toLocaleDateString("en-CA");
+      const logDate = new Date(log.logged_on).toLocaleDateString("en-CA");
+      if (log.habit_id == habit.id && date == logDate) {
+        return log;
+      }
+    });
+    console.log("frontend, deleting log: ", log);
+    deleteHabitLog(log.id).then(() => {
+      setRefresh(!refresh);
+    });
+  };
+  const handleLogHabit = (habit) => {
+    const date = new Date().toLocaleDateString("en-CA");
 
+    createHabitLog(habit.id, date).then(() => {
+      setRefresh(!refresh);
+    });
+  };
+  const isHabitLogged = (habit) => {
+    const date = new Date().toLocaleDateString("en-CA").slice(0, 10);
+    const value = logs.some((log) => {
+      const logDate = new Date(log.logged_on).toLocaleDateString("en-CA");
+      if (log.habit_id == habit.id && logDate == date) {
+        return true;
+      }
+
+      return false;
+    });
+    return value;
+  };
   return (
     <>
       <div className="app-container">
@@ -51,7 +89,20 @@ export default function App() {
           </form>
           {habits.map((habit) => (
             <li key={habit.id}>
-              {habit.name}
+              <label>
+                <input
+                  type="checkbox"
+                  checked={isHabitLogged(habit)}
+                  onChange={() => {
+                    if (isHabitLogged(habit)) {
+                      handleDeleteLog(habit);
+                    } else {
+                      handleLogHabit(habit);
+                    }
+                  }}
+                ></input>
+                {habit.name}
+              </label>
               <button onClick={() => handleDelete(habit)}>Delete</button>
             </li>
           ))}
