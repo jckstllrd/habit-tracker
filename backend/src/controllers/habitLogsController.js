@@ -8,7 +8,20 @@ const getAllHabitLogs = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
+const getHabitCurrentStreak = async (req, res) => {
+  const habitId = parseInt(req.params.habitId, 10);
+  try {
+    const habitCurrentStreak = await db.getHabitCurrentStreak(habitId);
+    let streak = parseInt(habitCurrentStreak[0].streak_length);
+    if (!streak) {
+      streak = 0;
+    }
+    console.log(streak);
+    res.status(200).json({ streak_length: streak });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 const getAllHabitLogsByHabitId = async (req, res) => {
   const habitId = parseInt(req.params.habitId, 10);
   try {
@@ -72,4 +85,5 @@ export {
   createHabitLog,
   updateHabitLog,
   deleteHabitLog,
+  getHabitCurrentStreak,
 };
