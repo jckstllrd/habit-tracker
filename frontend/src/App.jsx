@@ -9,6 +9,7 @@ import {
   createHabitLog,
   deleteHabitLog,
   getAllHabitLogs,
+  getHabitCurrentStreak,
 } from "./services/habitLogs";
 
 export default function App() {
@@ -18,9 +19,17 @@ export default function App() {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    getAllHabitsByUser().then((data) => {
-      setHabits(data);
+    getAllHabitsByUser().then((results) => {
+      Promise.all(
+        results.map((result) =>
+          getHabitCurrentStreak(result.id).then((curStreak) => ({
+            ...result,
+            streak: curStreak.streak_length,
+          })),
+        ),
+      ).then((results) => setHabits(results));
     });
+
     getAllHabitLogs().then((data) => {
       setLogs(data);
     });
@@ -102,6 +111,7 @@ export default function App() {
                   }}
                 ></input>
                 {habit.name}
+                Streak: {habit.streak}
               </label>
               <button onClick={() => handleDelete(habit)}>Delete</button>
             </li>
