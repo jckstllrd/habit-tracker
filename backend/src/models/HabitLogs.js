@@ -45,7 +45,6 @@ const getAllHabitLogsByHabitId = async (habitId) => {
 };
 
 const createHabitLog = async (habit_id, logged_on) => {
-  console.log(habit_id, logged_on);
   try {
     const results = await pool.query(
       "INSERT INTO habit_logs (habit_id, logged_on) VALUES ($1, $2) RETURNING *",
@@ -53,7 +52,6 @@ const createHabitLog = async (habit_id, logged_on) => {
     );
     return results.rows;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
