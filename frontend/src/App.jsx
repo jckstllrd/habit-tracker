@@ -11,6 +11,7 @@ import {
   getAllHabitLogs,
   getHabitCurrentStreak,
 } from "./services/habitLogs";
+import Habit from "./components/Habit";
 
 export default function App() {
   const [habits, setHabits] = useState([]);
@@ -35,7 +36,7 @@ export default function App() {
     });
   }, [refresh]);
 
-  const handleDelete = (habit) => {
+  const handleDeleteHabit = (habit) => {
     deleteHabit(habit.id).then(() => {
       setRefresh(!refresh);
     });
@@ -95,26 +96,18 @@ export default function App() {
             ></input>
             <button type="submit">Add Habit</button>
           </form>
-          {habits.map((habit) => (
-            <li key={habit.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={isHabitLogged(habit)}
-                  onChange={() => {
-                    if (isHabitLogged(habit)) {
-                      handleDeleteLog(habit);
-                    } else {
-                      handleLogHabit(habit);
-                    }
-                  }}
-                ></input>
-                {habit.name}
-                Streak: {habit.streak}
-              </label>
-              <button onClick={() => handleDelete(habit)}>Delete</button>
-            </li>
-          ))}
+          {habits.map((habit) => {
+            return (
+              <Habit
+                key={habit.id}
+                habit={habit}
+                isHabitLogged={isHabitLogged}
+                handleDeleteLog={handleDeleteLog}
+                handleLogHabit={handleLogHabit}
+                handleDeleteHabit={handleDeleteHabit}
+              />
+            );
+          })}
         </div>
       </div>
     </>
