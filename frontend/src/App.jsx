@@ -22,9 +22,9 @@ export default function App() {
     getAllHabitsByUser().then((results) => {
       Promise.all(
         results.map((result) =>
-          getHabitCurrentStreak(result.id).then((curStreak) => ({
+          getHabitCurrentStreak(result.id).then((data) => ({
             ...result,
-            streak: curStreak.streak_length,
+            streak: data.currentStreak,
           })),
         ),
       ).then((results) => setHabits(results));

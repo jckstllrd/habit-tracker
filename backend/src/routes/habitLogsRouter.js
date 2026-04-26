@@ -5,6 +5,11 @@ const habitLogsRouter = Router();
 
 habitLogsRouter.get("/", habitLogsController.getAllHabitLogs);
 habitLogsRouter.get(
+  "/habit/streak/:habitId",
+  habitLogsController.getHabitCurrentStreak,
+);
+
+habitLogsRouter.get(
   "/habit/:habitId",
   habitLogsController.getAllHabitLogsByHabitId,
 );

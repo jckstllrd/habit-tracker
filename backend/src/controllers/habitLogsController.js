@@ -11,14 +11,14 @@ const getAllHabitLogs = async (req, res) => {
 const getHabitCurrentStreak = async (req, res) => {
   const habitId = parseInt(req.params.habitId, 10);
   try {
-    const habitCurrentStreak = await db.getHabitCurrentStreak(habitId);
-    let streak = parseInt(habitCurrentStreak[0].streak_length);
-    if (!streak) {
-      streak = 0;
+    const habitStreakData = await db.getHabitCurrentStreak(habitId);
+    let streak = 0;
+    if (habitStreakData[0]) {
+      streak = parseInt(habitStreakData[0].streak);
     }
-    console.log(streak);
-    res.status(200).json({ streak_length: streak });
+    res.status(200).json({ currentStreak: streak });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };

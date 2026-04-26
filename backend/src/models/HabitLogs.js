@@ -9,6 +9,19 @@ const getAllHabitLogs = async () => {
   }
 };
 
+const getHabitCurrentStreak = async (habitId) => {
+  try {
+    const results = await pool.query(
+      "with numbered as (select id, habit_id, logged_on, logged_on - cast(row_number() over(order by logged_on) as int) as dateMinusRow from habit_logs where habit_id = $1) select (case when CURRENT_DATE - Max(logged_on) <= 1 then count(id) else 0 end) AS streak FROM numbered GROUP BY dateMinusRow having MAX(logged_on) >= CURRENT_DATE - 1",
+      [habitId],
+    );
+    console.log(results.rows);
+    return results.rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getHabitLogById = async (id) => {
   try {
     const results = await pool.query("SELECT * FROM habit_logs WHERE id = $1", [
@@ -72,4 +85,5 @@ export {
   createHabitLog,
   updateHabitLog,
   deleteHabitLog,
+  getHabitCurrentStreak,
 };
