@@ -55,7 +55,6 @@ export default function App() {
         return log;
       }
     });
-    console.log("frontend, deleting log: ", log);
     deleteHabitLog(log.id).then(() => {
       setRefresh(!refresh);
     });

@@ -1,8 +1,6 @@
-const basepath = "http://localhost:8080/habits";
+const basepath = `${import.meta.env.VITE_API_URL}/habits`;
 
 const userId = 1;
-
-export const getAllHabits = () => fetch(basepath).then((data) => data.json());
 
 export const getAllHabitsByUser = () =>
   fetch(`${basepath}/user/${userId}`).then((data) => data.json());

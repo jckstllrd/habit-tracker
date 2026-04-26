@@ -1,4 +1,4 @@
-const basepath = "http://localhost:8080/logs";
+const basepath = `${import.meta.env.VITE_API_URL}/logs`;
 
 export const getAllHabitLogs = () =>
   fetch(basepath).then((data) => data.json());
