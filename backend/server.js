@@ -22,6 +22,11 @@ app.use("/users", usersRouter);
 app.use("/habits", habitsRouter);
 app.use("/logs", habitLogsRouter);
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.statusCode || 500).json({ error: err.message });
+});
+
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
