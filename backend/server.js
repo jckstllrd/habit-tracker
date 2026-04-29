@@ -13,11 +13,6 @@ app.use(
   }),
 );
 
-app.get("/", (req, res) => {
-  console.log("habits dashboard will appear here - wip");
-  res.json({ message: "home success" });
-});
-
 app.use("/users", usersRouter);
 app.use("/habits", habitsRouter);
 app.use("/logs", habitLogsRouter);

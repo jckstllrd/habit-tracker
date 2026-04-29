@@ -1,14 +1,14 @@
 import * as db from "../models/HabitLogs.js";
 
-const getAllHabitLogs = async (req, res) => {
+const getAllHabitLogs = async (req, res, next) => {
   try {
     const habitLogs = await db.getAllHabitLogs();
     res.status(200).json(habitLogs);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
   }
 };
-const getHabitCurrentStreak = async (req, res) => {
+const getHabitCurrentStreak = async (req, res, next) => {
   const habitId = parseInt(req.params.habitId, 10);
   try {
     const habitStreakData = await db.getHabitCurrentStreak(habitId);
@@ -18,41 +18,41 @@ const getHabitCurrentStreak = async (req, res) => {
     }
     res.status(200).json({ currentStreak: streak });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
   }
 };
-const getAllHabitLogsByHabitId = async (req, res) => {
+const getAllHabitLogsByHabitId = async (req, res, next) => {
   const habitId = parseInt(req.params.habitId, 10);
   try {
     const habitLogsByHabitId = await db.getAllHabitLogsByHabitId(habitId);
     res.status(200).json(habitLogsByHabitId);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
   }
 };
 
-const getHabitLogById = async (req, res) => {
+const getHabitLogById = async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
 
   try {
     const habitLog = await db.getHabitLogById(id);
     res.status(200).json(habitLog);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
   }
 };
 
-const createHabitLog = async (req, res) => {
+const createHabitLog = async (req, res, next) => {
   const { habit_id, logged_on } = req.body;
   try {
     const results = await db.createHabitLog(habit_id, logged_on);
     res.status(201).json({ id: results[0].id });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
   }
 };
 
-const updateHabitLog = async (req, res) => {
+const updateHabitLog = async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   const { logged_on, habit_id } = req.body;
 
@@ -60,17 +60,17 @@ const updateHabitLog = async (req, res) => {
     await db.updateHabitLog(id, logged_on, habit_id);
     res.status(200).json({ id: id });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
   }
 };
 
-const deleteHabitLog = async (req, res) => {
+const deleteHabitLog = async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   try {
     await db.deleteHabitLog(id);
     res.status(200).json({ id: id });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
   }
 };
 
