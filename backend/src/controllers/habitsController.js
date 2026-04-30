@@ -1,4 +1,8 @@
+import { CustomNotFoundError } from "../errors/CustomNotFoundError.js";
+import * as Habit from "../schemas/habit.schema.js";
 import * as db from "../models/Habits.js";
+import z from "zod";
+import { ValidationError } from "../errors/ValidationError.js";
 
 const getAllHabits = async (req, res, next) => {
   try {
@@ -12,24 +16,30 @@ const getAllHabits = async (req, res, next) => {
 const getAllHabitsByUser = async (req, res, next) => {
   const userId = parseInt(req.params.userId, 10);
   try {
-    const habits = await db.getAllHabitsByUser(userId);
+    const validUserId = Habit.idSchema.parse(userId);
+    const habits = await db.getAllHabitsByUser(validUserId);
     res.status(200).json(habits);
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return next(new ValidationError("Habit Validation Failed"));
+    }
     next(error);
   }
 };
 
 const getHabitById = async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
-
   try {
-    const habit = await db.getHabitById(id);
+    const validId = Habit.idSchema.parse(id);
+    const habit = await db.getHabitById(validId);
     if (!habit[0]) {
-      res.status(404).json("Habit not found");
-      return;
+      throw new CustomNotFoundError("Habit Not Found");
     }
     res.status(200).json(habit);
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return next(new ValidationError("Habit ID Validation Failed"));
+    }
     next(error);
   }
 };
@@ -37,9 +47,13 @@ const getHabitById = async (req, res, next) => {
 const createHabit = async (req, res, next) => {
   const { name, userId } = req.body;
   try {
-    const results = await db.createHabit(name, userId);
+    const validHabit = Habit.habitSchema.parse({ name: name, userId: userId });
+    const results = await db.createHabit(validHabit.name, validHabit.userId);
     res.status(201).json({ id: results[0].id });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return next(new ValidationError("Habit Validation Failed"));
+    }
     next(error);
   }
 };
@@ -49,9 +63,14 @@ const updateHabit = async (req, res, next) => {
   const { name } = req.body;
 
   try {
-    await db.updateHabit(id, name);
-    res.status(200).json({ id: id });
+    const validName = Habit.nameSchema.parse(name);
+    const validId = Habit.idSchema.parse(id);
+    await db.updateHabit(validId, validName);
+    res.status(200).json({ id: validId });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return next(new ValidationError("Habit ID Validation Failed"));
+    }
     next(error);
   }
 };
@@ -59,9 +78,13 @@ const updateHabit = async (req, res, next) => {
 const deleteHabit = async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
   try {
-    await db.deleteHabit(id);
-    res.status(200).json({ id: id });
+    const validId = Habit.idSchema.parse(id);
+    await db.deleteHabit(validId);
+    res.status(200).json({ id: validId });
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return next(new ValidationError("Validation Failed"));
+    }
     next(error);
   }
 };
