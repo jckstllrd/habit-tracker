@@ -4,6 +4,7 @@ import usersRouter from "./src/routes/usersRouter.js";
 import habitsRouter from "./src/routes/habitsRouter.js";
 import habitLogsRouter from "./src/routes/habitLogsRouter.js";
 import authRouter from "./src/routes/authRouter.js";
+import { authRequest } from "./src/middleware/authMiddleware.js";
 const app = express();
 
 app.use(cors());
@@ -15,8 +16,8 @@ app.use(
 );
 
 app.use("/users", usersRouter);
-app.use("/habits", habitsRouter);
-app.use("/logs", habitLogsRouter);
+app.use("/habits", authRequest, habitsRouter);
+app.use("/logs", authRequest, habitLogsRouter);
 app.use("/auth", authRouter);
 
 app.use((err, req, res, next) => {
