@@ -9,6 +9,17 @@ const getAllUsers = async () => {
   }
 };
 
+const getUserByEmail = async (email) => {
+  try {
+    const results = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
+    return results.rows[0];
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getUserById = async (id) => {
   try {
     const results = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
@@ -18,13 +29,13 @@ const getUserById = async (id) => {
   }
 };
 
-const createUser = async (username, password_hash) => {
+const createUser = async (email, password_hash) => {
   try {
     const results = await pool.query(
-      "INSERT INTO users (username, password_hash) VALUES ($1, $2) RETURNING *",
-      [username, password_hash],
+      "INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING *",
+      [email, password_hash],
     );
-    return results.rows;
+    return results.rows[0].id;
   } catch (error) {
     throw error;
   }
@@ -49,4 +60,11 @@ const deleteUser = async (id) => {
   }
 };
 
-export { getAllUsers, getUserById, createUser, updateUser, deleteUser };
+export {
+  getAllUsers,
+  getUserByEmail,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+};

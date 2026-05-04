@@ -20,10 +20,10 @@ const getUserById = async (req, res, next) => {
 };
 
 const createUser = async (req, res, next) => {
-  const { username, email } = req.body;
+  const { email, password_hash } = req.body;
   try {
-    const results = await db.createUser(username, email);
-    res.status(201).json({ id: results[0].id });
+    const results = await db.createUser(email, password_hash);
+    res.status(201).json({ id: results[0].uuid });
   } catch (error) {
     next(error);
   }
