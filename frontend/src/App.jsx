@@ -1,10 +1,6 @@
 import "./styles/App.css";
 import { useEffect, useState } from "react";
-import {
-  createHabit,
-  deleteHabit,
-  getAllHabitsByUser,
-} from "./services/habits";
+import { createHabit, deleteHabit, getAllHabits } from "./services/habits";
 import {
   createHabitLog,
   deleteHabitLog,
@@ -20,7 +16,7 @@ export default function App() {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    getAllHabitsByUser().then((results) => {
+    getAllHabits().then((results) => {
       Promise.all(
         results.map((result) =>
           getHabitCurrentStreak(result.id).then((data) => ({
