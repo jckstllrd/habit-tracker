@@ -24,7 +24,7 @@ export const registerUser = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(validUser.password, 10);
     const userId = await UserModel.createUser(validUser.email, hashedPassword);
     const token = jwt.sign(
-      { userId: userId, email: validUser.email },
+      { id: userId, email: validUser.email },
       process.env.JWT_SECRET,
       { expiresIn: "24h" },
     );
@@ -53,7 +53,7 @@ export const loginUser = async (req, res, next) => {
       return next(new AuthenticationError("Invalid Credentials"));
     }
     const token = jwt.sign(
-      { userId: user.id, email: user.email },
+      { id: user.id, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "24h" },
     );

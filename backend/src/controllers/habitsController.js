@@ -5,16 +5,7 @@ import z from "zod";
 import { ValidationError } from "../errors/ValidationError.js";
 
 const getAllHabits = async (req, res, next) => {
-  try {
-    const habits = await db.getAllHabits();
-    res.status(200).json(habits);
-  } catch (error) {
-    next(error);
-  }
-};
-
-const getAllHabitsByUser = async (req, res, next) => {
-  const userId = parseInt(req.params.userId, 10);
+  const userId = req.user.id;
   try {
     const validUserId = Habit.idSchema.parse(userId);
     const habits = await db.getAllHabitsByUser(validUserId);
@@ -29,6 +20,7 @@ const getAllHabitsByUser = async (req, res, next) => {
 
 const getHabitById = async (req, res, next) => {
   const id = parseInt(req.params.id, 10);
+
   try {
     const validId = Habit.idSchema.parse(id);
     const habit = await db.getHabitById(validId);
@@ -45,7 +37,9 @@ const getHabitById = async (req, res, next) => {
 };
 
 const createHabit = async (req, res, next) => {
-  const { name, userId } = req.body;
+  const { name } = req.body;
+  const userId = req.user.id;
+  console.log(userId);
   try {
     const validHabit = Habit.habitSchema.parse({ name: name, userId: userId });
     const results = await db.createHabit(validHabit.name, validHabit.userId);
@@ -89,11 +83,4 @@ const deleteHabit = async (req, res, next) => {
   }
 };
 
-export {
-  getAllHabits,
-  getHabitById,
-  createHabit,
-  updateHabit,
-  deleteHabit,
-  getAllHabitsByUser,
-};
+export { getAllHabits, getHabitById, createHabit, updateHabit, deleteHabit };
