@@ -5,6 +5,8 @@ import { ValidationError } from "../errors/ValidationError.js";
 import { ConflictError } from "../errors/ConflictError.js";
 import z from "zod";
 import jwt from "jsonwebtoken";
+import { CustomNotFoundError } from "../errors/CustomNotFoundError.js";
+import { AuthenticationError } from "../errors/AuthenticationError.js";
 
 export const registerUser = async (req, res, next) => {
   const { email, password, confirmPassword } = req.body;
@@ -14,8 +16,8 @@ export const registerUser = async (req, res, next) => {
       password: password,
       confirmPassword: confirmPassword,
     });
-    const emailExists = await UserModel.getUserByEmail(validUser.email);
-    if (emailExists) {
+    const userExists = await UserModel.getUserByEmail(validUser.email);
+    if (userExists) {
       return next(new ConflictError("Invalid Email Address"));
     }
 
@@ -36,5 +38,30 @@ export const registerUser = async (req, res, next) => {
 };
 
 export const loginUser = async (req, res, next) => {
-  console.log("logging in");
+  const { email, password } = req.body;
+  try {
+    const validLogin = UserSchema.loginSchema.parse({
+      email: email,
+      password: password,
+    });
+    const user = await UserModel.getUserByEmail(validLogin.email);
+    if (!user) {
+      return next(new AuthenticationError("Invalid Credentials"));
+    }
+    const match = await bcrypt.compare(password, user.password_hash);
+    if (!match) {
+      return next(new AuthenticationError("Invalid Credentials"));
+    }
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" },
+    );
+    res.status(200).json({ token });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return next(new ValidationError("Invalid Credentials"));
+    }
+    next(error);
+  }
 };
