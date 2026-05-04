@@ -1,6 +1,5 @@
 import * as z from "zod";
 
-const uuid = z.string().min(1);
 const email = z.string().email();
 const username = z.string().min(1).max(50);
 
@@ -20,4 +19,9 @@ const registerSchema = z
     path: ["confirmPassword"],
   });
 
-export { registerSchema, username };
+const loginSchema = z.object({
+  email: email,
+  password: passwordSchema,
+});
+
+export { loginSchema, registerSchema, username };
