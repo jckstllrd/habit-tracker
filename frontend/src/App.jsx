@@ -8,6 +8,7 @@ import {
   getHabitCurrentStreak,
 } from "./services/habitLogs";
 import Habit from "./components/Habit";
+import { Outlet } from "react-router";
 
 export default function App() {
   const [habits, setHabits] = useState([]);
@@ -80,7 +81,6 @@ export default function App() {
       <div className="app-container">
         <div className="nav-bar">
           <h1 className="app-header">habits</h1>
-          <div>///</div>
         </div>
         <div className="grid-container">
           <form onSubmit={handleAdd}>
@@ -105,6 +105,7 @@ export default function App() {
             );
           })}
         </div>
+        <Outlet />
       </div>
     </>
   );
