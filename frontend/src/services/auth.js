@@ -10,7 +10,7 @@ export const login = (email, password) =>
   });
 
 export const register = (email, password, confirmPassword) =>
-  fetch(`${basepath}/registerj`, {
+  fetch(`${basepath}/register`, {
     method: "POST",
     body: JSON.stringify({ email, password, confirmPassword }),
     headers: {
