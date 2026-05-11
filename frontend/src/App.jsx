@@ -1,7 +1,16 @@
+import { useEffect } from "react";
+import { useAuth } from "./hooks/useAuth";
 import "./styles/App.css";
-import { Link, Outlet } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 
 export default function App() {
+  const navigate = useNavigate();
+  const auth = useAuth();
+  useEffect(() => {
+    if (!auth.token) {
+      navigate("/login");
+    }
+  }, [auth.token, navigate]);
   return (
     <>
       <div className="app-container">
@@ -16,6 +25,9 @@ export default function App() {
             </li>
             <li>
               <Link to="/register">Register</Link>
+            </li>
+            <li>
+              <button onClick={() => auth.logout()}>Logout</button>
             </li>
           </ul>
         </div>
