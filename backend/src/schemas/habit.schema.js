@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-const idSchema = z.number().int().positive();
+const idSchema = z.uuid();
 const nameSchema = z.string().min(1);
 
 const habitSchema = z.object({
