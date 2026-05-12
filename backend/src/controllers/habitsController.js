@@ -7,7 +7,7 @@ import { ValidationError } from "../errors/ValidationError.js";
 const getAllHabits = async (req, res, next) => {
   const userId = req.user.id;
   try {
-    const validUserId = Habit.idSchema.parse(userId);
+    const validUserId = Habit.userIdSchema.parse(userId);
     const habits = await db.getAllHabitsByUser(validUserId);
     res.status(200).json(habits);
   } catch (error) {
