@@ -29,6 +29,7 @@ export default function App() {
             <li>
               <button onClick={() => auth.logout()}>Logout</button>
             </li>
+            <li>Hi {auth.user.email}</li>
           </ul>
         </div>
         <Outlet />
