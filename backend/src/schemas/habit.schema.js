@@ -1,11 +1,12 @@
 import * as z from "zod";
 
-const idSchema = z.uuid();
+const userIdSchema = z.uuid();
+const idSchema = z.number().int().positive();
 const nameSchema = z.string().min(1);
 
 const habitSchema = z.object({
   name: nameSchema,
-  userId: idSchema,
+  userId: userIdSchema,
 });
 
-export { habitSchema, idSchema, nameSchema };
+export { habitSchema, idSchema, nameSchema, userIdSchema };

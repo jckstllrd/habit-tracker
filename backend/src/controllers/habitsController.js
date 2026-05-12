@@ -40,14 +40,13 @@ const createHabit = async (req, res, next) => {
   const { name } = req.body;
 
   const userId = req.user.id;
-  console.log(userId);
   try {
     const validHabit = Habit.habitSchema.parse({ name: name, userId: userId });
     const results = await db.createHabit(validHabit.name, validHabit.userId);
     res.status(201).json({ id: results[0].id });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return next(new ValidationError(`Habit Validation ${req.user} Failed`));
+      return next(new ValidationError(`Habit Validation Failed`));
     }
     next(error);
   }
