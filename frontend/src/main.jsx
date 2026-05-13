@@ -7,12 +7,17 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import AuthProvider from "./contexts/AuthContext.jsx";
-
+import { PrivateRoutes } from "./routes/PrivateRoutes.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [{ index: true, element: <DashboardPage /> }],
+    children: [
+      {
+        element: <PrivateRoutes />,
+        children: [{ index: true, element: <DashboardPage /> }],
+      },
+    ],
   },
   {
     path: "/login",
