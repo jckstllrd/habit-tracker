@@ -3,8 +3,10 @@ import * as LogSchema from "../schemas/log.schema.js";
 import * as HabitSchema from "../schemas/habit.schema.js";
 
 const getAllHabitLogs = async (req, res, next) => {
+  const userId = req.user.id;
   try {
-    const habitLogs = await db.getAllHabitLogs();
+    const validUserId = HabitSchema.userIdSchema.parse(userId);
+    const habitLogs = await db.getAllHabitLogs(validUserId);
     res.status(200).json(habitLogs);
   } catch (error) {
     next(error);

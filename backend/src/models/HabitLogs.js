@@ -1,8 +1,11 @@
 import { pool } from "../config/db.js";
 
-const getAllHabitLogs = async () => {
+const getAllHabitLogs = async (userId) => {
   try {
-    const results = await pool.query("SELECT * FROM habit_logs");
+    const results = await pool.query(
+      "SELECT habit_logs.id AS id, habit_logs.logged_on, habit_logs.habit_id FROM habit_logs LEFT JOIN habits ON habit_logs.habit_id=habits.id WHERE user_id=$1",
+      [userId],
+    );
     return results.rows;
   } catch (error) {
     throw error;

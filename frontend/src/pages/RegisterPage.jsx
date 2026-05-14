@@ -53,7 +53,7 @@ export default function RegisterPage() {
             type="password"
           ></input>
         </label>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </>
   );
