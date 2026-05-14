@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import * as authService from "../services/auth.js";
 
@@ -68,6 +68,9 @@ export default function RegisterPage() {
         </form>
       </div>
       <div className="errorMessage">{error ? error.message : ""}</div>
+      <p>
+        Already have an account? <Link to={"/login"}>Log In</Link>
+      </p>
     </>
   );
 }
