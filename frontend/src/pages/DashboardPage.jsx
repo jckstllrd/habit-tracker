@@ -14,7 +14,7 @@ export default function DashboardPage() {
   const [logs, setLogs] = useState([]);
   const [name, setName] = useState("");
   const [refresh, setRefresh] = useState(false);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getAllHabits().then((results) => {
       Promise.all(
@@ -24,7 +24,10 @@ export default function DashboardPage() {
             streak: data.currentStreak,
           })),
         ),
-      ).then((results) => setHabits(results));
+      ).then((results) => {
+        setLoading(false);
+        setHabits(results);
+      });
     });
 
     getAllHabitLogs().then((data) => {
@@ -75,6 +78,13 @@ export default function DashboardPage() {
     });
     return value;
   };
+  if (loading) {
+    return (
+      <>
+        <div>Loading Habits...</div>
+      </>
+    );
+  }
   return (
     <>
       <div className="app-container">
