@@ -1,0 +1,75 @@
+.habit-cell {
+  background-color: var(--secondary-colour);
+  border: 1px solid white;
+  border-radius: 10px;
+  aspect-ratio: 1/1;
+  display: flex;
+}
+
+.habit-content {
+  padding: 1.1rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.habit-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.habit-options {
+  color: var(--main-background);
+  border: none;
+  font-weight: 700;
+  background: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+.habit-name {
+  font-weight: 700;
+  color: var(--main-background);
+  font-size: 2.4rem;
+  margin: 0;
+}
+
+.habitStreak {
+  justify-self: flex-end;
+  align-self: flex-end;
+  flex: 1;
+  color: var(--main-background);
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.habit-completion {
+  height: 100%;
+}
+
+.habit-chart {
+  border: 2px solid var(--main-background);
+  border-radius: 10px;
+  height: 80%;
+}
+
+#habitName {
+  background: none;
+  color: var(--main-background);
+  font-weight: 700;
+  outline: none;
+  border-style: none;
+  width: 100%;
+  font-family: inherit;
+  padding: 0;
+  font-size: 2.4rem;
+}

@@ -1,3 +1,4 @@
+import classes from "./Habit.module.css";
 export default function Habit({
   habit,
   isHabitLogged,

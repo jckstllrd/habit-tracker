@@ -7,7 +7,7 @@ import {
   getAllHabitLogs,
   getHabitCurrentStreak,
 } from "../services/habitLogs";
-import Habit from "../components/Habit";
+import Habit from "../components/Habit/Habit";
 
 export default function DashboardPage() {
   const [habits, setHabits] = useState([]);
