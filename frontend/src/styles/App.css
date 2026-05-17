@@ -20,46 +20,6 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
-#root {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.app-container {
-  padding-top: 5rem;
-  display: grid;
-  grid-template-areas: "navbar" "habits";
-  grid-template-rows: auto 6fr;
-}
-
-.nav-bar {
-  grid-area: navbar;
-  display: flex;
-  justify-content: space-between;
-}
-
-.nav-menu {
-  font-size: 2.4rem;
-}
-
-.grid-container {
-  grid-area: habits;
-  width: 70vw;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fit, 250px);
-}
-.form-container {
-  border: 2px solid var(--secondary-colour);
-  border-radius: 10px;
-  aspect-ratio: 1/1;
-  text-align: center;
-  align-content: center;
-}
-
-.form-container p {
-  font-size: 2.4rem;
-}
