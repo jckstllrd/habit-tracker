@@ -1,4 +1,4 @@
-.habit-cell {
+.habitCell {
   background-color: var(--secondary-colour);
   border: 1px solid white;
   border-radius: 10px;
@@ -6,7 +6,7 @@
   display: flex;
 }
 
-.habit-content {
+.habitContent {
   padding: 1.1rem;
   display: flex;
   flex: 1;
@@ -14,12 +14,12 @@
   justify-content: space-between;
 }
 
-.habit-header {
+.habitHeader {
   display: flex;
   justify-content: space-between;
 }
 
-.habit-options {
+.habitOptions {
   color: var(--main-background);
   border: none;
   font-weight: 700;
@@ -36,7 +36,7 @@
   margin-left: 10px;
 }
 
-.habit-name {
+.habitName {
   font-weight: 700;
   color: var(--main-background);
   font-size: 2.4rem;
@@ -52,11 +52,11 @@
   margin: 0;
 }
 
-.habit-completion {
+.habitCompletion {
   height: 100%;
 }
 
-.habit-chart {
+.habitChart {
   border: 2px solid var(--main-background);
   border-radius: 10px;
   height: 80%;

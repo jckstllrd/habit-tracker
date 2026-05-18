@@ -7,19 +7,19 @@ export default function Habit({
   handleDeleteHabit,
 }) {
   return (
-    <div className="habit-cell">
-      <div className="habit-content">
-        <div className="habit-header">
-          <h3 className="habit-name">{habit.name}</h3>
+    <div className={classes.habitCell}>
+      <div className={classes.habitContent}>
+        <div className={classes.habitHeader}>
+          <h3 className={classes.habitName}>{habit.name}</h3>
           <button
-            className="habit-options"
+            className={classes.habitOptions}
             onClick={() => handleDeleteHabit(habit)}
           >
             Delete
           </button>
         </div>
-        <div className="habit-completion">
-          <label>
+        <div className={classes.habitCompletion}>
+          <label>Completed
             <input
               type="checkbox"
               checked={isHabitLogged(habit)}
@@ -32,7 +32,7 @@ export default function Habit({
               }}
             ></input>
           </label>
-          <p className="habitStreak">{habit.streak}</p>
+          <p className={classes.habitStreak}>{habit.streak}</p>
         </div>
       </div>
     </div>
