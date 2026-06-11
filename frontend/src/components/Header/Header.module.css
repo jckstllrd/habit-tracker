@@ -6,3 +6,12 @@
 .welcome {
   align-self: center;
 }
+
+.logoutBtn {
+  height: 2rem;
+  align-self: center;
+  background-color: var(--secondary-colour);
+  color: var(--main-background);
+  border: none;
+  border-radius: 12px;
+}

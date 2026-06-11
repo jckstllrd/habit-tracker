@@ -8,6 +8,9 @@ export default function Header() {
     <header className={styles.header}>
       <h1 className={styles.logo}>habit tracker</h1>
       <div className={styles.welcome}>hi, {email}</div>
+      <button className={styles.logoutBtn} onClick={() => auth.logout()}>
+        logout
+      </button>
     </header>
   );
 }
