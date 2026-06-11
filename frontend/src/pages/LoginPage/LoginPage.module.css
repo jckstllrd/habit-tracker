@@ -1,0 +1,26 @@
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  padding-top: 1rem;
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+}

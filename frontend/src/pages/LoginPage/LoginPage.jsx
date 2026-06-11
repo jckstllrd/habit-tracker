@@ -1,23 +1,19 @@
 import { useState } from "react";
+import * as authService from "../../services/auth.js";
 import { Link, useNavigate } from "react-router";
-import { useAuth } from "../hooks/useAuth";
-import * as authService from "../services/auth.js";
+import { useAuth } from "../../hooks/useAuth.js";
+import styles from "./LoginPage.module.css";
 
-export default function RegisterPage() {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   let navigate = useNavigate();
   let auth = useAuth();
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await authService.register(
-        email,
-        password,
-        confirmPassword,
-      );
+      const response = await authService.login(email, password);
 
       if (!response.ok) {
         throw new Error(`Invalid email or password`);
@@ -31,10 +27,11 @@ export default function RegisterPage() {
     }
   };
   return (
-    <>
-      <div className="registerForm">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">
+    <div className={styles.loginWrapper}>
+      <div className={styles.loginContainer}>
+        <h1 className={styles.logo}>habit tracker</h1>
+        <form onSubmit={handleSubmit} className={styles.loginForm}>
+          <label htmlFor="email" className={styles.formInput}>
             Email:{" "}
             <input
               name="email"
@@ -44,7 +41,7 @@ export default function RegisterPage() {
               value={email}
             ></input>
           </label>
-          <label htmlFor="password">
+          <label htmlFor="password" className={styles.formInput}>
             Password:
             <input
               required
@@ -54,23 +51,13 @@ export default function RegisterPage() {
               type="password"
             ></input>
           </label>
-          <label htmlFor="confirmPassword">
-            Confirm Password:
-            <input
-              required
-              name="confirmPassword"
-              onChange={(event) => setConfirmPassword(event.target.value)}
-              value={confirmPassword}
-              type="password"
-            ></input>
-          </label>
-          <button type="submit">Register</button>
+          <button type="submit">Login</button>
         </form>
+        <div className="errorMessage">{error ? error.message : ""}</div>
+        <p>
+          Don't have an account? <Link to={"/register"}>Register</Link>
+        </p>
       </div>
-      <div className="errorMessage">{error ? error.message : ""}</div>
-      <p>
-        Already have an account? <Link to={"/login"}>Log In</Link>
-      </p>
-    </>
+    </div>
   );
 }
