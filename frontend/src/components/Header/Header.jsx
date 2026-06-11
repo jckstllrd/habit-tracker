@@ -7,7 +7,6 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <h1 className={styles.logo}>habit tracker</h1>
-      <Nav />
       <div className={styles.welcome}>hi, {email}</div>
     </header>
   );

@@ -1,14 +1,7 @@
-import styles from "./DashboardPage.module.css";
-import { useEffect, useState } from "react";
-import { createHabit, deleteHabit, getAllHabits } from "../../services/habits";
-import {
-  createHabitLog,
-  deleteHabitLog,
-  getAllHabitLogs,
-  getHabitCurrentStreak,
-} from "../../services/habitLogs";
+import { useState } from "react";
 import Habit from "../../components/Habit/Habit";
 import useHabits from "../../hooks/useHabits";
+import styles from "./DashboardPage.module.css";
 
 export default function DashboardPage() {
   const {
@@ -31,38 +24,37 @@ export default function DashboardPage() {
     );
   }
   return (
-    <>
-      <div className="app-container">
-        <div className="grid-container">
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              handleCreateHabit(name);
-              setName("");
-            }}
-          >
-            <input
-              required
-              type="text"
-              onChange={(event) => setName(event.target.value)}
-              value={name}
-            ></input>
-            <button type="submit">Add Habit</button>
-          </form>
-          {habits.map((habit) => {
-            return (
-              <Habit
-                key={habit.id}
-                habit={habit}
-                isHabitLogged={isHabitLogged}
-                handleDeleteLog={handleDeleteLog}
-                handleLogHabit={handleLogHabit}
-                handleDeleteHabit={handleDeleteHabit}
-              />
-            );
-          })}
-        </div>
-      </div>
-    </>
+    <div className={styles.dashboard}>
+      <form
+        className={styles.habitForm}
+        onSubmit={(event) => {
+          event.preventDefault();
+          handleCreateHabit(name);
+          setName("");
+        }}
+      >
+        <input
+          required
+          type="text"
+          onChange={(event) => setName(event.target.value)}
+          value={name}
+        ></input>
+        <button className={styles.submitHabit} type="submit">
+          Add Habit
+        </button>
+      </form>
+      {habits.map((habit) => {
+        return (
+          <Habit
+            key={habit.id}
+            habit={habit}
+            isHabitLogged={isHabitLogged}
+            handleDeleteLog={handleDeleteLog}
+            handleLogHabit={handleLogHabit}
+            handleDeleteHabit={handleDeleteHabit}
+          />
+        );
+      })}
+    </div>
   );
 }

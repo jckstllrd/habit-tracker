@@ -1,0 +1,22 @@
+.dashboard {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.habitForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 16px;
+}
+
+.habitForm input {
+  border-radius: 10px;
+}
+
+.submitHabit {
+  border: 10px;
+}

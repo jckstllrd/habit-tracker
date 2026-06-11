@@ -1,4 +1,4 @@
-import classes from "./Habit.module.css";
+import styles from "./Habit.module.css";
 export default function Habit({
   habit,
   isHabitLogged,
@@ -7,33 +7,33 @@ export default function Habit({
   handleDeleteHabit,
 }) {
   return (
-    <div className={classes.habitCell}>
-      <div className={classes.habitContent}>
-        <div className={classes.habitHeader}>
-          <h3 className={classes.habitName}>{habit.name}</h3>
-          <button
-            className={classes.habitOptions}
-            onClick={() => handleDeleteHabit(habit)}
-          >
-            Delete
-          </button>
+    <div className={styles.habitCard}>
+      <div className={styles.habit}>
+        <input
+          className={styles.habitCheckbox}
+          type="checkbox"
+          checked={isHabitLogged(habit)}
+          onChange={() => {
+            if (isHabitLogged(habit)) {
+              handleDeleteLog(habit);
+            } else {
+              handleLogHabit(habit);
+            }
+          }}
+        ></input>
+
+        <div className={styles.habitContent}>
+          <h3 className={styles.habitName}>{habit.name}</h3>
+          <p className={styles.habitStreak}>streak: {habit.streak}</p>
         </div>
-        <div className={classes.habitCompletion}>
-          <label>Completed
-            <input
-              type="checkbox"
-              checked={isHabitLogged(habit)}
-              onChange={() => {
-                if (isHabitLogged(habit)) {
-                  handleDeleteLog(habit);
-                } else {
-                  handleLogHabit(habit);
-                }
-              }}
-            ></input>
-          </label>
-          <p className={classes.habitStreak}>{habit.streak}</p>
-        </div>
+      </div>
+      <div className={styles.habitDelete}>
+        <button
+          className={styles.habitOptions}
+          onClick={() => handleDeleteHabit(habit)}
+        >
+          x
+        </button>
       </div>
     </div>
   );

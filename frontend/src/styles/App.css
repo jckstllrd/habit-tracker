@@ -103,3 +103,11 @@ body {
   padding: 0;
   height: 100%;
 }
+
+main {
+  display: grid;
+  grid-template-columns: 1fr min(42rem, 100%) 1fr;
+}
+main > * {
+  grid-column: 2;
+}
