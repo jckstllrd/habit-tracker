@@ -1,0 +1,26 @@
+.registerWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  padding-top: 1rem;
+}
+
+.registerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+}

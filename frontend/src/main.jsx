@@ -3,9 +3,9 @@ import { createRoot } from "react-dom/client";
 import "./styles/index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import DashboardPage from "./pages/DashboardPage/DashboardPage";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
+import DashboardPage from "./pages/DashboardPage/DashboardPage.jsx";
 import AuthProvider from "./contexts/AuthContext.jsx";
 import { PrivateRoutes } from "./routes/PrivateRoutes.jsx";
 const router = createBrowserRouter([
